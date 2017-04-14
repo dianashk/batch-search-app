@@ -29,7 +29,12 @@ document.getElementById('body').onload = () => {
     let count = 0; 
     let columns = [];
 
-    const input = fs.createReadStream(settings.get('inputDataPath'));
+    const inputDataPath = settings.get('inputDataPath');    
+
+    // this will run async and set the line count in settings
+    getLineCount(inputDataPath);
+
+    const input = fs.createReadStream(inputDataPath);
 
     input.pipe(csvReader.createStream(options))
       .pipe(through.obj((data, enc, next) => {
@@ -38,24 +43,19 @@ document.getElementById('body').onload = () => {
         if (count === 0) {
           columns = Object.keys(data);
 
-          const thead = document.createElement('thead');
-                    
-          const checkboxes = columns.map((h) => {
-            return `<form><div class="form-group" style="text-align: center; margin-bottom: 0px;">` +
-              `<input type="checkbox" name="selected-columns" id="${h}">` +
-              `<label></label></div></form>`;
-          });          
-          addRow(thead, ['   '].concat(checkboxes));
+          settings.set(inputDataPath, { columns: columns });
 
+          const thead = document.createElement('thead');
+          
           const dropdowns = columns.map((h) => {
-            return `<select name="selected-columns" id="${h}">` +
-              `<option>-select-</option>` +
-              `<option>Full Address</option>` +
-              `<option>Num and Street</option>` +
-              `<option>City</option>` +
-              `<option>Region</option>` +
-              `<option>Country</option>` +
-              `<option>Postalcode</option>` +
+            return `<select id="select-${h}">` +
+              `<option value="">-- IGNORE --</option>` +
+              `<option value="text">Full Address</option>` +
+              `<option value="address">Num and Street</option>` +
+              `<option value="locality">City</option>` +
+              `<option value="region">State</option>` +
+              `<option value="country">Country</option>` +
+              `<option value="postalcode">Postalcode</option>` +
               `</select>`;
           });          
           addRow(thead, ['   '].concat(dropdowns));
@@ -66,19 +66,38 @@ document.getElementById('body').onload = () => {
         }
         
         count++;  
-        
-        data.mz_count = count;
 
+        data.mz_count = count;
         addRow(table, ['mz_count'].concat(columns), data);
-          
+
         if (count === 10) {
-          document.getElementById('showingPreview').innerHTML = '<p style="font-size: 0.9em; color: gray"><i>  ...only showing first 10 rows</i></p>';
+          document.getElementById('showingPreview').innerHTML =
+          `<p style="font-size: 0.9em; color: gray"><i>  ...only showing first 10 rows</i></p>`;
+
           return input.destroy();
         }
+                
         next();
       }));
   }
 };
+
+function getLineCount(inputDataPath) {
+  var i;
+  var count = 0;
+  fs.createReadStream(inputDataPath)
+      .on('data', function (chunk) {
+        for (i = 0; i < chunk.length; ++i)
+          if (chunk[i] == 10) count++;
+      })
+      .on('end', function () {
+        settings.set(`${inputDataPath}.lineCount`, count);
+        console.log('total line count:', count);
+        document.getElementById('showingPreview').innerHTML =
+          `<p style="font-size: 0.9em; color: gray"><i>  ...only showing first 10 rows of ${count}</i></p>`;
+
+    });
+}
 
 function addRow(parent, columns, data) {
   let tr = document.createElement('tr');
