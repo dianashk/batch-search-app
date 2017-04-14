@@ -16,27 +16,26 @@
     <div class="container">
       <div class="row">
         <div style="margin-bottom: 50px; margin-left: 30px;">
-          <h3>Select the input data file to be processed</h3>
+          <h3>Select the relevant columns and their corresponding meanings</h3>
         </div>
       </div>
 
-      <div class="row">
-        <form class="tall col-xs-6 col-md-6 col-lg-6 col-md-offset-1 col-xs-offset-1 col-lg-offset-1 col-xl-offset-1">
-          <div class="form-group row inline-submit">
-            <label><i class="fa fa-file-o" style="font-size: 2em; margin-right: 8px; vertical-align: middle;"></i>Input Data File (CSV):</label>
-            <button id="inputDataPathDisplay" class="btn btn-secondary btn-rounded">Select File...</button>
-          </div>
-        </form>
-      </div> <!-- row -->
+      <div id="tableWrapper" class="table-wrapper">
+        <table id="inputDataPreview" class="table">
+        </table>
+      </div> <!-- table-wrapper -->
+      <div id="showingPreview">
+        
+      </div>
     </div> <!-- container -->
 
     <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
       <div class="toolbar-actions">
-        <button id="btnPrevApiKey" class="btn btn-transparent">
+        <button id="btnPrevSelectInputDataFile" class="btn btn-transparent">
           <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-angle-left"></i> Select input data file
         </button>
-        <button id="btnNextMapColumns" class="btn btn-primary btn-mapzen pull-right">
-          Map data columns <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-angle-right"></i>
+        <button id="btnNextStart" class="btn btn-primary btn-mapzen pull-right">
+          Start Processing <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-angle-right"></i>
         </button>
       </div>
     </footer>
@@ -46,6 +45,6 @@
 
   </body>
 
-  <script src="../js/selectInputData.js" charset="utf-8"></script>
+  <script src="../js/selectColumns.js" charset="utf-8"></script>
 
 </html>

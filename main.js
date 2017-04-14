@@ -71,6 +71,14 @@ ipcMain.on('loadSelectInputData', _ => {
   }));
 });
 
+ipcMain.on('loadMapColumns', _ => {
+  win.loadURL(url.format({
+    pathname: path.join(__dirname, 'static', 'selectColumns.html'),
+    protocol: 'file:',
+    slashes: true
+  }));
+});
+
 ipcMain.on('openFile', (event, path) => {
   const { dialog } = require('electron')
   dialog.showOpenDialog(win, function (fileNames) {
