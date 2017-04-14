@@ -1,0 +1,14 @@
+{
+  "name": "batch-search-app",
+  "version": "0.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "./node_modules/.bin/electron ."
+  },
+  "dependencies": {
+    "electron": "^1.6.2",
+    "electron-settings": "^3.0.14"
+  },
+  "style": "dist/css/photon.css",
+  "sass": "sass/photon.scss"
+}
