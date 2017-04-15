@@ -34,12 +34,16 @@
   <body id="body" style="margin-top: 0px;">
 
     <div class="container">
-      <div id="map"></div>
+      <div class="row">
+        <div id="map"></div>
+      </div>
+      <div class="row">
+        <p id="progress" class="caption">Processing...</p>
+      </div>
     </div> <!-- container -->
 
     <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
       <div class="toolbar-actions">
-        <div id="progress" class="loading-spinner-02">Processed n of N</div>
         <button id="btnStop" class="btn btn-primary btn-mapzen pull-right">
           <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-stop"></i> Stop Processing
         </button>
