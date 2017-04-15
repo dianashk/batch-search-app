@@ -16,6 +16,7 @@ inputDataPathDisplay.addEventListener('click', _ => {
 
 ipcRenderer.on('fileSelected', (event, filename) => {
   settings.set('inputDataPath', filename);
+  settings.set('outputDataPath', `${filename}.output.csv`);
   document.getElementById('inputDataPathDisplay').innerText = filename;
 });
 
