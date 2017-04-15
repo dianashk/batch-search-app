@@ -6,11 +6,11 @@ document.querySelector('.apiKeyLink').addEventListener('click', _ => {
   shell.openExternal('https://mapzen.com/developers');
 });
 
-document.getElementById('btnNextSelectInputDataFile').addEventListener('click', _ => {
+document.getElementById('btnNext').addEventListener('click', _ => {
   const apiKey = document.getElementById('apiKey').value;
   if (apiKey !== 'mapzen-xxxxxxx' && apiKey.length === 14) {
     settings.set('apiKey', apiKey);
-    ipcRenderer.send('loadSelectInputData');
+    ipcRenderer.send('loadPage', 'selectInputData');
   }  
   else {
     dialog.showErrorBox('Invalid API Key', 'API Key ' + apiKey + ' is invalid! Please try again.');

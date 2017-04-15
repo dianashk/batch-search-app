@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Mapzen Search</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../dist/css/photon.min.css">
+
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <link rel="stylesheet" href="https://mapzen.com/common/styleguide/styles/styleguide.css">
+
+    <link rel="stylesheet" href="https://mapzen.com/js/mapzen.css">
+    <script src="https://mapzen.com/js/mapzen.min.js"></script>
+
+    <script src="../node_modules/leaflet-pulse-icon/dist/L.Icon.Pulse.js"></script>
+    <link rel="stylesheet" href="../node_modules/leaflet-pulse-icon/dist/L.Icon.Pulse.css">
+    
+    <script src="../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="../node_modules/leaflet.markercluster/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="../node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css">
+
+    <style>
+      #map {
+        margin-top: 3%;
+        height: 80%;
+        width: 90%;
+        position: absolute;
+      }
+      html,body{margin: 0; padding: 0;}
+    </style>
+
+  </head>
+  <body id="body" style="margin-top: 0px;">
+
+    <div class="container">
+      <div id="map"></div>
+    </div> <!-- container -->
+
+    <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
+      <div class="toolbar-actions">
+        <div id="progress" class="loading-spinner-02">Processed n of N</div>
+        <button id="btnStop" class="btn btn-primary btn-mapzen pull-right">
+          <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-stop"></i> Stop Processing
+        </button>
+        <button id="btnPause" class="btn btn-transparent pull-right">
+          <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-pause"></i> Pause
+        </button>
+      </div>
+    </footer>
+
+    <!-- Javascript -->
+    <script src="https://mapzen.com/common/styleguide/scripts/mapzen-styleguide.min.js"></script>
+
+  </body>
+
+  <script src="../js/progressMap.js" charset="utf-8"></script>
+
+</html>

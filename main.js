@@ -11,13 +11,8 @@ function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({width: 800, height: 600})
 
-  // and load the index.html of the app.
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, 'static', 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
-
+  loadPage('apiKey');
+  
   // Open the DevTools.
   win.webContents.openDevTools()
 
@@ -55,28 +50,8 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-ipcMain.on('loadApiKey', _ => {
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, 'static', 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }));
-});
-
-ipcMain.on('loadSelectInputData', _ => {
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, 'static', 'selectInputDataFile.html'),
-    protocol: 'file:',
-    slashes: true
-  }));
-});
-
-ipcMain.on('loadMapColumns', _ => {
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, 'static', 'selectColumns.html'),
-    protocol: 'file:',
-    slashes: true
-  }));
+ipcMain.on('loadPage', (event, pageName) => {
+  loadPage(pageName);
 });
 
 ipcMain.on('openFile', (event, path) => {
@@ -90,3 +65,11 @@ ipcMain.on('openFile', (event, path) => {
     }
   });
 });
+
+function loadPage(pageName) {
+  win.loadURL(url.format({
+    pathname: path.join(__dirname, 'static', `${pageName}.html`),
+    protocol: 'file:',
+    slashes: true
+  }));
+}

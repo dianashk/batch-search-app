@@ -1,12 +1,12 @@
 const { ipcRenderer } = require('electron');
 const settings = require('electron-settings');
 
-document.getElementById('btnPrevApiKey').addEventListener('click', _ => {
-  ipcRenderer.send('loadApiKey');
+document.getElementById('btnPrev').addEventListener('click', _ => {
+  ipcRenderer.send('loadPage', 'apiKey');
 });
 
-document.getElementById('btnNextMapColumns').addEventListener('click', _ => {
-  ipcRenderer.send('loadMapColumns');
+document.getElementById('btnNext').addEventListener('click', _ => {
+  ipcRenderer.send('loadPage', 'selectColumns');
 });
 
 var inputDataPathDisplay = document.getElementById('inputDataPathDisplay');

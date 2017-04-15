@@ -4,17 +4,17 @@ const fs = require('fs');
 const csvReader = require('csv-stream');
 const through = require('through2');
 
-document.getElementById('btnPrevSelectInputDataFile').addEventListener('click', _ => {
-  ipcRenderer.send('loadSelectInputData');
+document.getElementById('btnPrev').addEventListener('click', _ => {
+  saveSettings();
+  ipcRenderer.send('loadPage', 'selectInputData');
 });
 
-document.getElementById('btnNextStart').addEventListener('click', _ => {
-  ipcRenderer.send('loadStart');
+document.getElementById('btnNext').addEventListener('click', _ => {
+  saveSettings();
+  ipcRenderer.send('loadPage', 'progressMap');
 });
 
 document.getElementById('body').onload = () => {
-  console.log('onload', settings.get('inputDataPath'));
-
   if (settings.has('inputDataPath')) {
     const data = fs.readFileSync(settings.get('inputDataPath'));
     const table = document.getElementById('inputDataPreview');
@@ -49,7 +49,7 @@ document.getElementById('body').onload = () => {
           
           const dropdowns = columns.map((h) => {
             return `<select id="select-${h}">` +
-              `<option value="">-- IGNORE --</option>` +
+              `<option value="unused">-- IGNORE --</option>` +
               `<option value="text">Full Address</option>` +
               `<option value="address">Num and Street</option>` +
               `<option value="locality">City</option>` +
@@ -109,4 +109,14 @@ function addRow(parent, columns, data) {
     tr.appendChild(td);
   });
   parent.appendChild(tr);
+}
+
+function saveSettings() {
+  var columns = settings.get(`${settings.get('inputDataPath')}.columns`);
+  if (columns && columns.length > 0) {
+    var mapping = columns.map((c) => {
+      return { column: c, mapping: document.getElementById(`select-${c}`).value };
+    });
+    settings.set(`${settings.get('inputDataPath')}.column-mapping`, mapping);
+  }
 }

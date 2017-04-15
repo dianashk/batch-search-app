@@ -11,21 +11,20 @@
     <link rel="stylesheet" href="https://mapzen.com/common/styleguide/styles/styleguide.css">
     
   </head>
-  <body id="body" style="margin-top: 0px; margin-bottom: 0px;">
+  <body id="body" style="margin-top: 0px;">
 
     <div class="container">
       <div class="row">
         <div style="margin-bottom: 50px; margin-left: 30px;">
-          <h3>Start a new geocoding batch</h3>
+          <h3>Select the input data file to be processed</h3>
         </div>
       </div>
 
       <div class="row">
         <form class="tall col-xs-6 col-md-6 col-lg-6 col-md-offset-1 col-xs-offset-1 col-lg-offset-1 col-xl-offset-1">
-          <div class="form-group row">
-            <label><img src="https://mapzen.com/common/styleguide/images/key.svg" style="margin-right: 8px; vertical-align: middle;">API Key:</label>
-            <input id="apiKey" type="text" placeholder="mapzen-xxxxxx">
-            <p class="caption apiKeyLink"><u>Get your Mapzen Developer API key here...</u></p>
+          <div class="form-group row inline-submit">
+            <label><i class="fa fa-file-o" style="font-size: 2em; margin-right: 8px; vertical-align: middle;"></i>Input Data File (CSV):</label>
+            <button id="inputDataPathDisplay" class="btn btn-secondary btn-rounded">Select File...</button>
           </div>
         </form>
       </div> <!-- row -->
@@ -33,8 +32,11 @@
 
     <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
       <div class="toolbar-actions">
-        <button id="btnNextSelectInputDataFile" class="btn btn-primary btn-mapzen pull-right">
-            Select input data file <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-angle-right"></i>
+        <button id="btnPrev" class="btn btn-transparent">
+          <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-angle-left"></i> Select input data file
+        </button>
+        <button id="btnNext" class="btn btn-primary btn-mapzen pull-right">
+          Map data columns <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-angle-right"></i>
         </button>
       </div>
     </footer>
@@ -44,6 +46,6 @@
 
   </body>
 
-  <script src="../js/header.js" charset="utf-8"></script>
+  <script src="../js/selectInputData.js" charset="utf-8"></script>
 
 </html>
