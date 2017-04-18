@@ -21,13 +21,14 @@
     <link rel="stylesheet" href="../node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css">
 
     <style>
+      #map-container {
+        height: calc(100% - 50px - 63px);
+        position: relative;
+      }
       #map {
-        margin-top: 3%;
-        height: 70%;
-        width: 90%;
+        height: 100%;
+        width: 100%;
         position: absolute;
-        top: 15%;
-        left: 5%;
       }
       #progress-text {
         text-align: center;
@@ -58,26 +59,24 @@
   </head>
   <body id="body">
 
-  <div id="progress" class="row">
-      <div id="progress-total" class="col-md-10 col-lg-10">
-        <div id="progress-done" class="col-md-10 col-lg-10"></div>
+    <div id="progress" class="row">
+      <div id="progress-total">
+        <div id="progress-done"></div>
       </div>
     </div>
 
-    <div class="container">
-      <div class="row">
-        <div id="map"></div>
-      </div>
+    <div id="map-container">
+      <div id="map"></div>
     </div> <!-- container -->
 
     <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
       <div class="toolbar-actions">
         <button id="btnStop" class="btn btn-primary btn-mapzen pull-right">
-          <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-stop"></i> Stop Processing
+          <i class="button-icons fa fa-fw fa-stop"></i> Stop Processing
         </button>
-        <button id="btnPause" class="btn btn-transparent pull-right">
-          <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-pause"></i> Pause
-        </button>
+        <!--<button id="btnPause" class="btn btn-transparent pull-right">
+          <i class="button-icons fa fa-fw fa-pause"></i> Pause
+        </button>-->
       </div>
     </footer>
 

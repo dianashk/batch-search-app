@@ -6,37 +6,33 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../dist/css/photon.min.css">
-
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <link rel="stylesheet" href="https://mapzen.com/common/styleguide/styles/styleguide.css">
+    <link rel="stylesheet" href="../css/common.css">
     
   </head>
-  <body id="body" style="margin-top: 0px;">
+  <body id="body">
 
-    <div class="container">
-      <div class="row">
-        <div style="margin-bottom: 50px; margin-left: 30px;">
-          <h3>Select the input data file to be processed</h3>
+    <div id="title-bar">
+      <p style="color: #f8f8f8">Which CSV file would you like to geocode and where shall we store your results?</p>
+    </div>
+
+    <div id="form-container">
+      <form>
+        <div class="form-group row">
+          <button id="inputDataPathDisplay" class="btn btn-secondary data-file">Select Input CSV File...</button>
+          <br><br>
+          <button id="outputDataPathDisplay" class="btn btn-secondary data-file">Select Output CSV File...</button>
         </div>
-      </div>
-
-      <div class="row">
-        <form class="tall col-xs-6 col-md-6 col-lg-6 col-md-offset-1 col-xs-offset-1 col-lg-offset-1 col-xl-offset-1">
-          <div class="form-group row inline-submit">
-            <label><i class="fa fa-file-o" style="font-size: 2em; margin-right: 8px; vertical-align: middle;"></i>Input Data File (CSV):</label>
-            <button id="inputDataPathDisplay" class="btn btn-secondary btn-rounded">Select File...</button>
-          </div>
-        </form>
-      </div> <!-- row -->
-    </div> <!-- container -->
+      </form>
+    </div>
 
     <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
       <div class="toolbar-actions">
         <button id="btnPrev" class="btn btn-transparent">
-          <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-angle-left"></i> Select input data file
+          <i class="button-icons fa fa-fw fa-angle-left"></i> Select input data file
         </button>
         <button id="btnNext" class="btn btn-primary btn-mapzen pull-right">
-          Map data columns <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-angle-right"></i>
+          Map data columns <i class="button-icons fa fa-fw fa-angle-right"></i>
         </button>
       </div>
     </footer>

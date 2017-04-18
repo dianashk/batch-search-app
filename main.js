@@ -1,4 +1,4 @@
-const {app, ipcMain, BrowserWindow} = require('electron')
+const {app, ipcMain, BrowserWindow, dialog} = require('electron')
 const path = require('path')
 const url = require('url')
 const settings = require('electron-settings');
@@ -14,7 +14,7 @@ function createWindow () {
   loadPage('apiKey');
   
   // Open the DevTools.
-  win.webContents.openDevTools()
+  //win.webContents.openDevTools()
 
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -55,13 +55,34 @@ ipcMain.on('loadPage', (event, pageName) => {
 });
 
 ipcMain.on('openFile', (event, path) => {
-  const { dialog } = require('electron')
-  dialog.showOpenDialog(win, function (fileNames) {
+  const options = {
+    filters: [{ name: 'CSV', extensions: ['csv'] }],
+    properties: ['openFile']
+  };
+  
+  dialog.showOpenDialog(win, options, function (fileNames) {
     // fileNames is an array that contains all the selected
     if (fileNames === undefined) {
       return;
     } else {
-      event.sender.send('fileSelected', fileNames[0]);
+      event.sender.send('openFileResults', fileNames[0]);
+    }
+  });
+});
+
+ipcMain.on('createFile', (event, path, defaultPath) => {
+  const options = {
+    defaultPath: defaultPath,
+    filters: [{ name: 'CSV', extensions: ['csv'] }],
+    properties: ['openFile']
+  };
+  
+  dialog.showSaveDialog(win, options, function (fileName) {
+    // fileNames is an array that contains all the selected
+    if (fileName === undefined) {
+      return;
+    } else {
+      event.sender.send('createFileResults', fileName);
     }
   });
 });

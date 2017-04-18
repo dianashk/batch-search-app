@@ -9,15 +9,22 @@ document.getElementById('btnNext').addEventListener('click', _ => {
   ipcRenderer.send('loadPage', 'selectColumns');
 });
 
-var inputDataPathDisplay = document.getElementById('inputDataPathDisplay');
-inputDataPathDisplay.addEventListener('click', _ => {
+document.getElementById('inputDataPathDisplay').addEventListener('click', _ => {
   ipcRenderer.send('openFile');
 });
 
-ipcRenderer.on('fileSelected', (event, filename) => {
+document.getElementById('outputDataPathDisplay').addEventListener('click', _ => {
+  ipcRenderer.send('createFile', settings.get('inputDataPath'));
+});
+
+ipcRenderer.on('openFileResults', (event, filename) => {
   settings.set('inputDataPath', filename);
-  settings.set('outputDataPath', `${filename}.output.csv`);
   document.getElementById('inputDataPathDisplay').innerText = filename;
+});
+
+ipcRenderer.on('createFileResults', (event, filename) => {
+  settings.set('outputDataPath', filename);
+  document.getElementById('outputDataPathDisplay').innerText = filename;
 });
 
 document.getElementById('body').onload = () => {

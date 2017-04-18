@@ -66,7 +66,6 @@ document.getElementById('body').onload = () => {
         shell.showItemInFolder(settings.get('outputDataPath'));
       });
       
-      document.getElementById('btnPause').remove();
       document.getElementById('btnStop').innerHTML = '<i class="button-icons fa fa-fw fa-star"></i> weeee, let\'s do that again!';
       document.getElementById('btnStop').addEventListener('click', _ => {
         ipcRenderer.send('loadPage', 'apiKey');

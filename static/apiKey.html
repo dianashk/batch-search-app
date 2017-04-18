@@ -6,35 +6,30 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../dist/css/photon.min.css">
-
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <link rel="stylesheet" href="https://mapzen.com/common/styleguide/styles/styleguide.css">
-    
+    <link rel="stylesheet" href="../css/common.css">
+
   </head>
-  <body id="body" style="margin-top: 0px; margin-bottom: 0px;">
+  <body id="body">
 
-    <div class="container">
-      <div class="row">
-        <div style="margin-bottom: 50px; margin-left: 30px;">
-          <h3>Start a new geocoding batch</h3>
+    <div id="title-bar">
+      <p style="color: #f8f8f8">It's <i>KEY</i> ;) that we first get your Mapzen Developer credentials</p>
+    </div>
+
+    <div id="form-container">
+      <form>
+        <div class="form-group row">
+          <input id="apiKey" type="text" placeholder="mapzen-xxxxxx">
+          <br><br> 
+          <p class="caption apiKeyLink"><u>Don't have one yet? Get your key here...</u></p>
         </div>
-      </div>
-
-      <div class="row">
-        <form class="tall col-xs-6 col-md-6 col-lg-6 col-md-offset-1 col-xs-offset-1 col-lg-offset-1 col-xl-offset-1">
-          <div class="form-group row">
-            <label><img src="https://mapzen.com/common/styleguide/images/key.svg" style="margin-right: 8px; vertical-align: middle;">API Key:</label>
-            <input id="apiKey" type="text" placeholder="mapzen-xxxxxx">
-            <p class="caption apiKeyLink"><u>Get your Mapzen Developer API key here...</u></p>
-          </div>
-        </form>
-      </div> <!-- row -->
-    </div> <!-- container -->
-
+      </form>
+    </div>
+    
     <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
       <div class="toolbar-actions">
         <button id="btnNext" class="btn btn-primary btn-mapzen pull-right">
-            Select input data file <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-angle-right"></i>
+            Select input data file <i class="button-icons fa fa-fw fa-angle-right"></i>
         </button>
       </div>
     </footer>
