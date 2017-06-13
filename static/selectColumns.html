@@ -6,20 +6,17 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../dist/css/photon.min.css">
-
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <link rel="stylesheet" href="https://mapzen.com/common/styleguide/styles/styleguide.css">
+    <link rel="stylesheet" href="../css/common.css">
     
   </head>
-  <body id="body" style="margin-top: 0px;">
+  <body id="body">
 
-    <div class="container">
-      <div class="row">
-        <div style="margin-bottom: 50px; margin-left: 30px;">
-          <h3>Select the relevant columns and their corresponding meanings</h3>
-        </div>
-      </div>
+    <div id="title-bar">
+      <p style="color: #f8f8f8">Select the columns to be used as input to the geocoder</p>
+    </div>
 
+    <div id="table-container" class="container">
       <div id="tableWrapper" class="table-wrapper">
         <table id="inputDataPreview" class="table">
         </table>
@@ -32,10 +29,10 @@
     <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
       <div class="toolbar-actions">
         <button id="btnPrev" class="btn btn-transparent">
-          <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-angle-left"></i> Select input data file
+          <i class="button-icons fa fa-fw fa-angle-left"></i> Select input data file
         </button>
         <button id="btnNext" class="btn btn-primary btn-mapzen pull-right">
-          Start Processing <i style="font-size: 2em; margin-right: 8px; vertical-align: middle;" class="fa fa-fw fa-angle-right"></i>
+          Start Processing <i class="button-icons fa fa-fw fa-angle-right"></i>
         </button>
       </div>
     </footer>

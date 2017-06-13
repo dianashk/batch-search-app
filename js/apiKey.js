@@ -17,7 +17,7 @@ document.getElementById('btnNext').addEventListener('click', _ => {
   }
 });
 
-document.getElementById('body').onload = () => {
+document.getElementById('body').onload = _ => {
   if (settings.has('apiKey') && settings.get('apiKey') !== 'mapzen-xxxxxxx') {
     document.getElementById('apiKey').value = settings.get('apiKey');
   }  
