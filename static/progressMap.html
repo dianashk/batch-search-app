@@ -9,6 +9,7 @@
 
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <link rel="stylesheet" href="https://mapzen.com/common/styleguide/styles/styleguide.css">
+    <link rel="stylesheet" href="../css/common.css">
 
     <link rel="stylesheet" href="https://mapzen.com/js/mapzen.css">
     <script src="https://mapzen.com/js/mapzen.min.js"></script>
@@ -22,7 +23,7 @@
 
     <style>
       #map-container {
-        height: calc(100% - 50px - 63px);
+        height: calc(100% - 100px - 63px);
         position: relative;
       }
       #map {
@@ -59,15 +60,19 @@
   </head>
   <body id="body">
 
-    <div id="progress" class="row">
-      <div id="progress-total">
-        <div id="progress-done"></div>
-      </div>
+    <div id="title-bar">
+      <p style="color: #f8f8f8">Geocoding in progress</p>
     </div>
 
     <div id="map-container">
       <div id="map"></div>
     </div> <!-- container -->
+
+    <div id="progress" class="row">
+      <div id="progress-total">
+        <div id="progress-done"></div>
+      </div>
+    </div>
 
     <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
       <div class="toolbar-actions">

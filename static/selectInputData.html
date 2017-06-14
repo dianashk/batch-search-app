@@ -19,9 +19,16 @@
     <div id="form-container">
       <form>
         <div class="form-group row">
-          <button id="inputDataPathDisplay" class="btn btn-secondary data-file">Select Input CSV File...</button>
-          <br><br>
-          <button id="outputDataPathDisplay" class="btn btn-secondary data-file">Select Output CSV File...</button>
+          <h4>Select input file:</h4>
+          <div style="border-style: solid; border-width: 1px; padding: 5px; margin: 20px;">
+            <button id="inputDataPathDisplay" class="btn btn-secondary">Select File...</button>
+            <span id="inputDataPathDisplayLabel" style="margin-left: 5px">No file selected</span>
+          </div>
+          <h4>Select output file:</h4>
+          <div style="border-style: solid; border-width: 1px; padding: 5px; margin: 20px;">
+            <button id="outputDataPathDisplay" class="btn btn-secondary">Select File...</button>
+            <span id="outputDataPathDisplayLabel" style="margin-left: 5px">No file selected</span>
+          </div>
         </div>
       </form>
     </div>

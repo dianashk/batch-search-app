@@ -19,16 +19,16 @@ document.getElementById('outputDataPathDisplay').addEventListener('click', _ => 
 
 ipcRenderer.on('openFileResults', (event, filename) => {
   settings.set('inputDataPath', filename);
-  document.getElementById('inputDataPathDisplay').innerText = filename;
+  document.getElementById('inputDataPathDisplayLabel').innerText = filename;
 });
 
 ipcRenderer.on('createFileResults', (event, filename) => {
   settings.set('outputDataPath', filename);
-  document.getElementById('outputDataPathDisplay').innerText = filename;
+  document.getElementById('outputDataPathDisplayLabel').innerText = filename;
 });
 
 document.getElementById('body').onload = () => {
   if (settings.has('inputDataPath')) {
-    document.getElementById('inputDataPathDisplay').innerText = settings.get('inputDataPath');
+    document.getElementById('inputDataPathDisplayLabel').innerText = settings.get('inputDataPath');
   }  
 };

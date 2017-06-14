@@ -33,7 +33,19 @@ const adminIcon = L.icon({
 document.getElementById('body').onload = () => {
   // Add a Mapzen API key
   L.Mapzen.apiKey = settings.get('apiKey');
-  map = L.Mapzen.map('map', {maxZoom: 18, minZoom:2});
+  map = L.Mapzen.map('map', {
+    maxZoom: 18,
+    minZoom: 2,
+    tangramOptions: {
+      scene: {
+        import: [
+          'https://mapzen.com/carto/refill-style/7/refill-style.zip',
+          'https://mapzen.com/carto/refill-style/7/themes/brown-orange.zip'
+        ],
+        global: { 'sdk_building_extrude': 'false' }
+      }  
+    }
+  });
   
   // Set the center of the map to be the San Francisco Bay Area at zoom level 12
   map.setView([0, 0], 2);
