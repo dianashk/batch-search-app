@@ -13,21 +13,41 @@
   <body id="body">
 
     <div id="title-bar">
-      <p style="color: #f8f8f8">It's <i>KEY</i> ;) that we first get your Mapzen Developer credentials</p>
+      <p style="color: #f8f8f8">Please select an API key</p>
     </div>
 
-    <div id="form-container">
-      <form>
-        <div class="form-group row">
-          <input id="apiKey" type="text" placeholder="mapzen-xxxxxx">
-          <br><br> 
-          <p class="caption apiKeyLink"><u>Don't have one yet? Get your key here...</u></p>
-        </div>
-      </form>
+    <div id="table-container" class="container" style="top: 20px;">
+      <div class="table-wrapper row" style="margin-right: auto; margin-left: auto; width: 85%">
+        <table>
+          <tr>
+            <td style="width: 80px">
+              <img id="user-avatar" class="avatar" src="../mapzen-util/public/img/mapzen-logo.png">
+            </td>
+            <td>
+              <div class="byline-author">
+                <h4 id="user-nickname">clever-nick-name</h4>
+                <p id="user-email"><i>me@gmail.com</i></p>
+              </div>              
+            </td>            
+          </tr>
+        </table>
+      </div>       
+      
+      <div id="table-container" class="container headroom-large footroom">
+        <div class="form-group-header">Select the key to use:</div>  
+        <div id="tableWrapper" class="table-wrapper" style="padding-bottom: 100px">
+          <table id="user-keys" class="table">
+          </table>
+        </div>        
+      </div>
+      
     </div>
     
     <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
       <div class="toolbar-actions">
+        <button id="btnPrev" class="btn btn-mapzen btn-secondary" onclick="switchUser()">
+           <i class="button-icons fa fa-fw fa-angle-left"></i> Switch User
+        </button>            
         <button id="btnNext" class="btn btn-primary btn-mapzen pull-right">
             Select input data file <i class="button-icons fa fa-fw fa-angle-right"></i>
         </button>

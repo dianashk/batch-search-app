@@ -100,7 +100,7 @@ function onFinish(incomplete) {
 
   document.getElementById('btnStop').innerHTML = '<i class="button-icons fa fa-fw fa-star"></i> weeee, let\'s do that again!';
   document.getElementById('btnStop').addEventListener('click', _ => {
-    ipcRenderer.send('loadPage', 'apiKey');
+    ipcRenderer.send('loadPage', 'selectInputData');
   });
 }
 

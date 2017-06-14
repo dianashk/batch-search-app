@@ -5,6 +5,14 @@ const settings = require('electron-settings');
 
 let win;
 
+const config = require('./config.json');
+if (config.auth) {
+  const auth = require('./mapzen-util/src/js/authMain');
+  auth.init(ipcMain);
+} else {
+  process.exit();
+}
+
 app.on('ready', createWindow);
 app.on('window-all-closed', () => {
   app.quit();
@@ -14,7 +22,7 @@ function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({ width: 800, height: 600 });
 
-  loadPage('apiKey');
+  loadPage('intro');
   
   win.on('closed', () => {
     win = null;
