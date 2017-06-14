@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://mapzen.com/common/styleguide/styles/styleguide.css">
+    <link rel="stylesheet" href="../src/css/common.css">
+
+  </head>
+  <body id="body">
+
+    <table style="width: 100%; text-align: center">
+      <tr>
+        <td style="padding-top: 20px"><img id="user-avatar" class="avatar" src="./img/mapzen-logo.png"></td>
+      </tr>
+      <tr>
+        <td><h3 id="user-nickname">clever-nick-name</h3></td>
+      </tr>
+      <tr>
+        <td><label id="user-email">email@gmail.com</label></td>
+      </tr>
+      <tr><td>
+        <button id="btnSwitchUser" class="btn btn-mapzen" onclick="switchUser()">Switch to another User</button>
+      </td></tr>
+    </table>
+    
+
+    <div id="table-container" class="container headroom-large footroom">
+      <div class="form-group-header">Select the key to use:</div>  
+      <div id="tableWrapper" class="table-wrapper">
+        <table id="user-keys" class="table">
+        </table>
+      </div>
+      <button id="btnUpdate" class="btn btn-primary btn-mapzen" onclick="closeWindow()">Update</button>
+    </div>
+    
+    <!-- Javascript -->
+    <script src="https://mapzen.com/common/styleguide/scripts/mapzen-styleguide.min.js"></script>
+
+  </body>
+
+  <script src="../src/js/user.js" charset="utf-8"></script>
+
+</html>
