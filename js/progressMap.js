@@ -50,6 +50,8 @@ document.getElementById('body').onload = () => {
   // Set the center of the map to be the San Francisco Bay Area at zoom level 12
   map.setView([0, 0], 2);
 
+  addLegend();  
+
   const inputDataPath = settings.get('inputDataPath');
   const endpoint = settings.get(`${inputDataPath}.endpoint`);
   const columns = settings.get(`${inputDataPath}.column-mapping`);
@@ -93,6 +95,23 @@ document.getElementById('body').onload = () => {
     onFinish
   );
 };
+
+function addLegend() {
+  var legend = L.control({ position: 'topright' });
+
+  legend.onAdd = function (map) {
+    const div = L.DomUtil.create('div', 'info legend');
+    const layers = ['venue', 'address', 'street', 'admin'];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    layers.forEach((layer) => {
+      div.innerHTML += `<img src="../dist/${layer}.png"></img><span>${layer}</span><br/>`;
+    });
+    return div;
+  };
+
+  legend.addTo(map);
+}
 
 function onFinish(incomplete) {
   const progressBar = document.getElementById('progress-done');
