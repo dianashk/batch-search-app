@@ -16,47 +16,6 @@
 
     <script src="../node_modules/leaflet-pulse-icon/dist/L.Icon.Pulse.js"></script>
     <link rel="stylesheet" href="../node_modules/leaflet-pulse-icon/dist/L.Icon.Pulse.css">
-    
-    <script src="../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-    <link rel="stylesheet" href="../node_modules/leaflet.markercluster/dist/MarkerCluster.css">
-    <link rel="stylesheet" href="../node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css">
-
-    <style>
-      #map-container {
-        height: calc(100% - 100px - 63px);
-        position: relative;
-      }
-      #map {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-      }
-      #progress-text {
-        text-align: center;
-        display: inline-block;
-        vertical-align: middle;
-        line-height: normal;
-        line-height: 50px;
-        width: 100%;
-      }
-      #progress-total {
-        width: 100%;
-        background-color: #f8f8f8;
-      }
-      #progress-done {
-        height: 50px;
-        width: 0%;
-        background-color: #1e0e33; 
-        color: #f8f8f8;
-      }
-      .button-icons {
-        font-size: 2em;
-        margin-right: 8px;
-        vertical-align: middle;
-      }
-      html,body{margin-top: 0px; margin: 0; padding: 0;}
-    </style>
-
   </head>
   <body id="body">
 
@@ -70,18 +29,19 @@
 
     <div id="progress" class="row">
       <div id="progress-total">
-        <div id="progress-done"></div>
+        <span id="progress-text"></span>
       </div>
+      <div id="progress-done"></div>
     </div>
 
     <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
       <div class="toolbar-actions">
+        <button id="btnStartOver" class="btn btn-secondary" onclick="startOver()" style="display: none">
+          <i class="button-icons fa fa-fw fa-angle-left"></i> Start Over
+        </button>
         <button id="btnStop" class="btn btn-primary btn-mapzen pull-right">
           <i class="button-icons fa fa-fw fa-stop"></i> Stop Processing
         </button>
-        <!--<button id="btnPause" class="btn btn-transparent pull-right">
-          <i class="button-icons fa fa-fw fa-pause"></i> Pause
-        </button>-->
       </div>
     </footer>
 

@@ -85,4 +85,35 @@
 .legend span {
   margin-right: 4px;
 }
+
+#map-container {
+  height: calc(100% - 100px - 63px);
+  position: relative;
+}
+#map {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+#progress-text {
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  line-height: 40px;
+  background-color: #f8f8f8;
+  width: 100%;
+}
+#progress-total {
+  width: 100%;
+  height: 40px;
+  background-color: #f8f8f8;
+}
+#progress-done {
+  height: 10px;
+  width: 0%;
+  background-color: #1e0e33;
+  color: #f8f8f8;
+}
+
 html,body{margin: 0; padding: 0;}

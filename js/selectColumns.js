@@ -102,8 +102,9 @@ function getLineCount(inputDataPath) {
         for (i = 0; i < chunk.length; ++i)
           if (chunk[i] == 10) count++;
       })
-      .on('end', function () {
-        settings.set(`${inputDataPath}.lineCount`, count);
+    .on('end', function () {
+        //subtract 1 for header row
+        settings.set(`${inputDataPath}.lineCount`, count-1);
         console.log('total line count:', count);
         document.getElementById('showingPreview').innerHTML =
           `<p style="font-size: 0.9em; color: gray"><i>  ...only showing first 10 rows of ${count}</i></p>`;

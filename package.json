@@ -11,8 +11,6 @@
     "electron": "^1.6.2",
     "electron-settings": "^3.0.14",
     "express": "^4.15.3",
-    "leaflet-pulse-icon": "^0.1.0",
-    "leaflet.markercluster": "^1.0.4",
     "lodash": "^4.17.4",
     "pelias-batch-search": "git://github.com/pelias/scripts-batch-search.git#smarter-batch",
     "through2": "^2.0.3"

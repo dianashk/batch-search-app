@@ -5,6 +5,9 @@ const mapzenSearch = require('pelias-batch-search');
 
 // Add a map to the 'map' div
 let map = null;
+let totalCount = 0;
+let errorCount = 0;
+let processedCount = 0;
 
 const venueIcon = L.icon({
     iconUrl: '../dist/venue.png',
@@ -63,10 +66,6 @@ document.getElementById('body').onload = () => {
     columns: columns,
     queryParams: {
       'api_key': settings.get('apiKey')
-      // "boundary.rect.min_lat": 39.719799,
-      // "boundary.rect.min_lon": -80.519851,
-      // "boundary.rect.max_lat": 42.516072,
-      // "boundary.rect.max_lon": -74.689502
     }    
   };
 
@@ -76,14 +75,14 @@ document.getElementById('body').onload = () => {
     onFinish(true);
   });
   
-  const totalCount = settings.get(`${settings.get('inputDataPath')}.lineCount`) || 0;
+  totalCount = settings.get(`${settings.get('inputDataPath')}.lineCount`) || 0;
   mapzenSearch(
     params,
     function (updateType, data, bbox) {
       if (keepGoing) {
         switch (updateType) {
           case 'progress':
-            updateProgress(data, totalCount, bbox);
+            updateProgress();
             break;
           case 'row':
             addDotToMap(data, bbox);
@@ -95,6 +94,10 @@ document.getElementById('body').onload = () => {
     onFinish
   );
 };
+
+function startOver() {
+  ipcRenderer.send('loadPage', 'selectInputData');
+}
 
 function addLegend() {
   var legend = L.control({ position: 'topright' });
@@ -115,24 +118,26 @@ function addLegend() {
 
 function onFinish(incomplete) {
   const progressBar = document.getElementById('progress-done');
+  const progressText = document.getElementById('progress-text');
   progressBar.style.width = '100%';
 
+  updateProgress();
+
   if (incomplete) {
-    progressBar.innerHTML =
-      `<span id="progress-text">You asked to stop before results could be generated   😩 </span>`;
+    progressText.innerHTML = `Stopped before completion: ${progressText.innerHTML}`;
   }
   else {
-    progressBar.innerHTML =
-      `<span id="progress-text">Your results are here: <a>${settings.get('outputDataPath')}</a></span>`;
-    progressBar.addEventListener('click', _ => {
-      shell.showItemInFolder(settings.get('outputDataPath'));
-    });
+    progressText.innerHTML = `Finished: ${progressText.innerHTML}`;
   }
 
-  document.getElementById('btnStop').innerHTML = '<i class="button-icons fa fa-fw fa-star"></i> weeee, let\'s do that again!';
-  document.getElementById('btnStop').addEventListener('click', _ => {
-    ipcRenderer.send('loadPage', 'selectInputData');
-  });
+  const stopBtn = document.getElementById('btnStop');
+  stopBtn.addEventListener('click', _ => {
+      shell.showItemInFolder(settings.get('outputDataPath'));
+    });
+  stopBtn.innerHTML = '<i class="button-icons fa fa-fw fa-star"></i> Show results file';
+
+  // show the start over button
+  document.getElementById('btnStartOver').style.display = 'inline-block';
 }
 
 function htmlify(data) {
@@ -151,9 +156,12 @@ function htmlify(data) {
 
 function addDotToMap(data, bbox) {
 
-  if (data.res_label === 'ERROR: 0 results') {
+  if (data.res_label.indexOf('ERROR:') === 0) {
+    errorCount++;
     return;
   }
+
+  processedCount++;
   
   let icon;
   switch (data.res_layer) {
@@ -177,10 +185,24 @@ function addDotToMap(data, bbox) {
   map.fitBounds(bounds, {padding:[50,50]});
 }
 
-function updateProgress(progress, totalCount) {
-  let progressText = `Processed ${progress} rows`;
-  if (totalCount > 0) {
-    progressText += ` of ${totalCount}`;
-    document.getElementById('progress-done').style.width = `${progress / totalCount * 100}%`;
+function updateProgress() {
+  if (totalCount == 0) {
+    totalCount = settings.get(`${settings.get('inputDataPath')}.lineCount`) || 0;
   }
+
+  const progressTextEl = document.getElementById('progress-text');
+  const progress = errorCount + processedCount;
+  let progressText = `Processed ${progress} rows`;
+
+  if (totalCount > 0) {
+    const pct = (progress / totalCount * 100).toFixed(0);
+    progressText += ` of ${totalCount}`;
+    document.getElementById('progress-done').style.width = `${pct}%`;
+  }
+
+  if (errorCount) {
+    progressText += ` (errors: ${errorCount})`;
+  }
+
+  progressTextEl.innerHTML = progressText;
 }
