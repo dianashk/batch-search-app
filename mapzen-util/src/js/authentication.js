@@ -15,7 +15,6 @@ let oauth_config;
 // obtain an authorization code by redirecting to the host
 // and allowing the user to login and click authorize
 function authenticate(config, ipcRenderer, clearCache, callback) {
-  getAuthCallback = null;
   oauth_config = config;
 
   if (isAuthenticated()) {
@@ -36,10 +35,17 @@ function isAuthenticated() {
   return settings.get('auth_token') && (settings.get('auth_expiration') > (Date.now()/1000));
 }
 
+function killAuthentication() {
+  console.log('Ending authentication before success');
+  callbackServer.close();
+}
+
 function initAuthCallbackServer(ipcRenderer, clearCache, callback) {
+  ipcRenderer.on('killAuthentication', killAuthentication);
+  
   // receive the authorization code from the host
   app.get('/mapzen/auth/callback', function (req, res) {
-    var code = req.query.code;
+    let code = req.query.code;
     console.log('\n\nauthorization callback headers\n', req.headers);
     console.log('\n\nreceived authorization code: ' + code);
     exchangeToken(code, function (error, token, expiration) {
@@ -48,10 +54,13 @@ function initAuthCallbackServer(ipcRenderer, clearCache, callback) {
         console.log(error);
         return;
       }
+      console.log('got me an auth token');
       res.send('all good');
 
       // send message to main window to close auth window
-      ipcRenderer.send('login-success');
+      //ipcRenderer.send('login-success');
+
+      //ipcRenderer.send('loadPage', 'apiKey');
 
       // save token and user data to local settings
       settings.set('auth_token', token);
@@ -133,7 +142,6 @@ function getKeys(callback) {
         return callback(err);
       }
 
-      var keysSelector = document.createElement('select');
       //Create and append the options
       var keys = JSON.parse(res.body);
       settings.set('user_keys', keys);
@@ -153,7 +161,7 @@ function getUserProfile(callback) {
         return callback(err);
       }
 
-      var userData = JSON.parse(res.body);
+      let userData = JSON.parse(res.body);
       settings.set('user_nickname', userData.nickname);
       settings.set('user_avatar', userData.avatar);
       settings.set('user_email', userData.email);
@@ -163,3 +171,4 @@ function getUserProfile(callback) {
 }
 
 module.exports.authenticate = authenticate;
+module.exports.killAuthentication = killAuthentication;

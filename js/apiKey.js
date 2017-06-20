@@ -64,6 +64,5 @@ function selectCurrentKey() {
 function switchUser() {
   settings.deleteAll();
   settings.set('clearAuthCache', true);
-
-  ipcRenderer.send('loadPage', 'intro', 'clearCache');
+  ipcRenderer.send('authenticate');
 }
