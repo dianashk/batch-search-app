@@ -120,17 +120,9 @@ function addLegend() {
 
 function onFinish() {
   const progressBar = document.getElementById('progress-done');
-  const progressText = document.getElementById('progress-text');
   progressBar.style.width = '100%';
 
   updateProgress();
-
-  if (keepGoing === false) {
-    progressText.innerHTML = `Stopped before completion: ${progressText.innerHTML}`;
-  }
-  else {
-    progressText.innerHTML = `Finished: ${progressText.innerHTML}`;
-  }
 
   const stopBtn = document.getElementById('btnStop');
   stopBtn.addEventListener('click', _ => {
@@ -188,22 +180,30 @@ function addDotToMap(data, bbox) {
 }
 
 function updateProgress() {
-  if (totalCount == 0) {
+  if (totalCount === 0) {
     totalCount = settings.get(`${settings.get('inputDataPath')}.lineCount`) || 0;
   }
 
   const progressTextEl = document.getElementById('progress-text');
   const progress = errorCount + processedCount;
+
   let progressText = `Processed ${progress} rows`;
+
+  if (errorCount) {
+    progressText += ` (errors: ${errorCount})`;
+  }
 
   if (totalCount > 0) {
     const pct = (progress / totalCount * 100).toFixed(0);
     progressText += ` of ${totalCount}`;
     document.getElementById('progress-done').style.width = `${pct}%`;
-  }
 
-  if (errorCount) {
-    progressText += ` (errors: ${errorCount})`;
+    if (totalCount === progress) {
+      progressText = `Finished: ${progressText}`;
+    }
+    else if (keepGoing === false) {
+      progressText = `Stopped before completion: ${progressText}`;
+    }
   }
 
   progressTextEl.innerHTML = progressText;

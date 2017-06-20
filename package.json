@@ -1,25 +1,26 @@
 {
   "name": "batch-search-app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "main.js",
   "scripts": {
     "start": "./node_modules/.bin/electron .",
-    "package-mac": "electron-packager ./ \"Mapzen Search\" --platform=darwin --arch=x64 --icon=./dist/favicon.ico.icns"
+    "package-mac": "electron-packager . \"Mapzen Search\" --platform=darwin --icon=./dist/favicon.ico.icns"
   },
   "dependencies": {
     "async": "^2.4.1",
     "csv-stream": "^0.1.3",
-    "electron": "^1.6.2",
     "electron-debug": "^1.1.0",
     "electron-settings": "^3.0.14",
     "express": "^4.15.3",
     "lodash": "^4.17.4",
     "pelias-batch-search": "git://github.com/pelias/scripts-batch-search.git#smarter-batch",
+    "request": "^2.81.0",
     "through2": "^2.0.3"
   },
   "style": "dist/css/photon.css",
   "sass": "sass/photon.scss",
   "devDependencies": {
+    "electron": "^1.7.3",
     "devtron": "^1.4.0",
     "electron-packager": "^8.7.1"
   }
