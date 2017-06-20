@@ -6,9 +6,9 @@
   text-align: center;
   display: inline-block;
   vertical-align: middle;
-  line-height: normal;
   line-height: 50px;
-  width: 100%;
+  font-family: "Poppins", "Open Sans", Helvetica, Arial, sans-serif;
+  font-weight: 500;
 }
 #form-container {
   height: calc(100% - 50px - 25% - 63px);

@@ -2,6 +2,7 @@ const { ipcRenderer, shell } = require('electron');
 const { dialog } = require('electron').remote;
 const settings = require('electron-settings');
 const fs = require('fs');
+const countLines = require('../js/lineCount');
 const csvReader = require('csv-stream');
 const through = require('through2');
 
@@ -30,7 +31,6 @@ document.getElementById('btnNext').addEventListener('click', _ => {
 
 document.getElementById('body').onload = () => {
   if (settings.has('inputDataPath')) {
-    const data = fs.readFileSync(settings.get('inputDataPath'));
     const table = document.getElementById('inputDataPreview');
 
     const options = {
@@ -99,21 +99,19 @@ document.getElementById('body').onload = () => {
 };
 
 function getLineCount(inputDataPath) {
-  var i;
-  var count = 0;
-  fs.createReadStream(inputDataPath)
-      .on('data', function (chunk) {
-        for (i = 0; i < chunk.length; ++i)
-          if (chunk[i] == 10) count++;
-      })
-    .on('end', function () {
-        //subtract 1 for header row
-        settings.set(`${inputDataPath}.lineCount`, count-1);
-        console.log('total line count:', count);
-        document.getElementById('showingPreview').innerHTML =
-          `<p style="font-size: 0.9em; color: gray"><i>  ...only showing first 10 rows of ${count}</i></p>`;
-
-    });
+  countLines(inputDataPath, (err, numberOfLines) => {
+    if (err) {
+      console.error(err);
+      settings.set(`${inputDataPath}.lineCount`, 0);
+      return;
+    }
+    //subtract 1 for header row
+    numberOfLines -= 1;
+    settings.set(`${inputDataPath}.lineCount`, numberOfLines);
+    console.log('total line count:', numberOfLines);
+    document.getElementById('showingPreview').innerHTML =
+      `<p style="font-size: 0.9em; color: gray"><i>  ...only showing first 10 rows of ${numberOfLines}</i></p>`;
+  });
 }
 
 function addRow(parent, columns, data) {

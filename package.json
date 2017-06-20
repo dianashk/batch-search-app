@@ -18,6 +18,7 @@
     "lodash": "^4.17.4",
     "pelias-batch-search": "git://github.com/pelias/scripts-batch-search.git#smarter-batch",
     "request": "^2.81.0",
+    "split": "^1.0.0",
     "through2": "^2.0.3"
   },
   "style": "dist/css/photon.css",

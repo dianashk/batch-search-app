@@ -60,7 +60,7 @@ document.getElementById('body').onload = () => {
   const endpoint = settings.get(`${inputDataPath}.endpoint`);
   const columns = settings.get(`${inputDataPath}.column-mapping`);
   
-  var params = {
+  const params = {
     inputFile: settings.get('inputDataPath'),
     outputFile: settings.get('outputDataPath'),
     endpoint: endpoint,
@@ -102,7 +102,7 @@ function startOver() {
 }
 
 function addLegend() {
-  var legend = L.control({ position: 'topright' });
+  const legend = L.control({ position: 'topright' });
 
   legend.onAdd = function (map) {
     const div = L.DomUtil.create('div', 'info legend');
@@ -170,7 +170,7 @@ function addDotToMap(data, bbox) {
       break;
     default:
       icon = adminIcon;
-  };
+  }
   
   const marker = L.marker([data.res_latitude, data.res_longitude], { icon: icon }).addTo(map);
   marker.bindPopup(htmlify(data));
