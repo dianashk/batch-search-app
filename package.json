@@ -6,6 +6,9 @@
     "start": "./node_modules/.bin/electron .",
     "package-mac": "electron-packager . \"Mapzen Search\" --platform=darwin --icon=./dist/favicon.ico.icns"
   },
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "dependencies": {
     "async": "^2.4.1",
     "csv-stream": "^0.1.3",
