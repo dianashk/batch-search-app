@@ -7,21 +7,23 @@ const async = require('async');
 
 
 // initialize our web server
-var app = express();
+const app = express();
 let callbackServer;
 let oauth_config;
+let ownerProcess;
 
 
 // obtain an authorization code by redirecting to the host
 // and allowing the user to login and click authorize
-function authenticate(config, ipcRenderer, clearCache, callback) {
+function authenticate(config, owner, callback) {
   oauth_config = config;
+  ownerProcess = owner;
 
   if (isAuthenticated()) {
     return getUserData(callback);
   }
 
-  initAuthCallbackServer(ipcRenderer, clearCache, callback);  
+  initAuthCallbackServer(callback);
 }
 
 function isAuthenticated() {
@@ -35,14 +37,7 @@ function isAuthenticated() {
   return settings.get('auth_token') && (settings.get('auth_expiration') > (Date.now()/1000));
 }
 
-function killAuthentication() {
-  console.log('Ending authentication before success');
-  callbackServer.close();
-}
-
-function initAuthCallbackServer(ipcRenderer, clearCache, callback) {
-  ipcRenderer.on('killAuthentication', killAuthentication);
-  
+function initAuthCallbackServer(callback) {
   // receive the authorization code from the host
   app.get('/mapzen/auth/callback', function (req, res) {
     let code = req.query.code;
@@ -56,11 +51,6 @@ function initAuthCallbackServer(ipcRenderer, clearCache, callback) {
       }
       console.log('got me an auth token');
       res.send('all good');
-
-      // send message to main window to close auth window
-      //ipcRenderer.send('login-success');
-
-      //ipcRenderer.send('loadPage', 'apiKey');
 
       // save token and user data to local settings
       settings.set('auth_token', token);
@@ -79,12 +69,12 @@ function initAuthCallbackServer(ipcRenderer, clearCache, callback) {
   callbackServer = app.listen(9000, function () {
     console.log('listening to port 9000');
 
-    var query = querystring.stringify({
+    let query = querystring.stringify({
       client_id: oauth_config.client_id,
       redirect_uri: oauth_config.redirect_uri,
       response_type: 'code'
     });
-    ipcRenderer.send('login', `${oauth_config.host}/oauth/authorize?${query}`, clearCache);
+    ownerProcess.loadLoginPage(`${oauth_config.host}/oauth/authorize?${query}`);
   });
 
 }  
@@ -111,7 +101,7 @@ function exchangeToken(code, callback) {
     console.log('\n\nexchange token response headers\n', response.headers);
     console.log(body);
 
-    var parsed = JSON.parse(body);
+    const parsed = JSON.parse(body);
     if (parsed.access_token) {
       // success! return our token
       callback(null, parsed.access_token, parsed.created_at + parsed.expires_in);
@@ -171,4 +161,3 @@ function getUserProfile(callback) {
 }
 
 module.exports.authenticate = authenticate;
-module.exports.killAuthentication = killAuthentication;

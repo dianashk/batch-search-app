@@ -21,10 +21,19 @@
         <div class="form-group row" style="text-align: center;">
           <p>Before we get started, please login to your Mapzen Developer account.</p>
           <p>Go ahead, we'll wait right here.</p>
+          <p><i>Clicking the Login button below will open a new window in which you'll authenticate.</i></p>
         </div>
       </form>
     </div>
     
+    <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
+      <div class="toolbar-actions">
+        <button id="btnNext" class="btn btn-primary btn-mapzen pull-right" onclick="onLogin()">
+            Login <i class="button-icons fa fa-fw fa-angle-right"></i>
+        </button>
+      </div>
+    </footer>
+
     <!-- Javascript -->
     <script src="https://mapzen.com/common/styleguide/scripts/mapzen-styleguide.min.js"></script>
 

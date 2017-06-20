@@ -1,16 +1,29 @@
-const { app, ipcMain, BrowserWindow, dialog } = require('electron');
+const { app, ipcMain, BrowserWindow, dialog, Menu } = require('electron');
 const path = require('path');
 const url = require('url');
 const settings = require('electron-settings');
+const auth = require('./mapzen-util/src/js/authentication.js');
+const config = require('./config.json');
+
+require('electron-debug')({showDevTools: false});
 
 let win;
 
-const config = require('./config.json');
-if (config.auth) {
-  const auth = require('./mapzen-util/src/js/authMain');
-  auth.init(ipcMain);
-} else {
-  process.exit();
+const authOwner = {
+  loadLoginPage: (authUrl) => {
+    console.log('got a login message');
+
+    if (settings.get('clearAuthCache')) {
+      console.log('clearing previous cache to allow new login session');
+      win.webContents.session.clearStorageData();
+    }
+    console.log('authMain loading url', authUrl);
+    win.loadURL(authUrl);
+  }
+};
+
+if (!config.auth) {
+  throw new Error('No authentication configuration could be found.');
 }
 
 app.on('ready', createWindow);
@@ -18,16 +31,60 @@ app.on('window-all-closed', () => {
   app.quit();
 });
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600 });
+  win = new BrowserWindow({
+    width: 800,
+    height: 600
+  });
+  win.setTitle('Mapzen Search');
 
   loadPage('intro');
   
   win.on('closed', () => {
     win = null;
   });
+
+  const menuTemplate = [
+    {
+      label: 'Mapzen',
+      submenu: [
+        {
+          label: 'About ...',
+          click: () => {
+            console.log('About Clicked');
+          }
+        }, {
+          label: 'Quit',
+          click: () => {
+            app.quit();
+          }
+        }
+      ]
+    }
+  ];
+
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
 }
+
+ipcMain.on('authenticate', () => {
+  auth.authenticate(config.auth, authOwner, (err) => {
+    if (err) {
+      console.log(err.message);
+    }
+    loadPage('apiKey');
+    settings.set('clearAuthCache', false);
+  });
+});
+
+/**
+ * Automatically close the authentication window after a successful callback
+ */
+ipcMain.on('login-success', () => {
+  console.log('loading apiKey window after successful login');
+  loadPage('apiKey');
+});
 
 ipcMain.on('loadPage', (event, pageName) => {
   loadPage(pageName);

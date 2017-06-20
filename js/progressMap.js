@@ -5,6 +5,7 @@ const mapzenSearch = require('pelias-batch-search');
 
 // Add a map to the 'map' div
 let map = null;
+let keepGoing = true;
 let totalCount = 0;
 let errorCount = 0;
 let processedCount = 0;
@@ -69,10 +70,11 @@ document.getElementById('body').onload = () => {
     }    
   };
 
-  let keepGoing = true;
+  keepGoing = true;
+
   document.getElementById('btnStop').addEventListener('click', _ => {
     keepGoing = false;
-    onFinish(true);
+    onFinish();
   });
   
   totalCount = settings.get(`${settings.get('inputDataPath')}.lineCount`) || 0;
@@ -116,14 +118,14 @@ function addLegend() {
   legend.addTo(map);
 }
 
-function onFinish(incomplete) {
+function onFinish() {
   const progressBar = document.getElementById('progress-done');
   const progressText = document.getElementById('progress-text');
   progressBar.style.width = '100%';
 
   updateProgress();
 
-  if (incomplete) {
+  if (keepGoing === false) {
     progressText.innerHTML = `Stopped before completion: ${progressText.innerHTML}`;
   }
   else {

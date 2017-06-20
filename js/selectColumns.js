@@ -1,9 +1,13 @@
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, shell } = require('electron');
 const { dialog } = require('electron').remote;
 const settings = require('electron-settings');
 const fs = require('fs');
 const csvReader = require('csv-stream');
 const through = require('through2');
+
+function openDocumentation() {
+  shell.openExternal('https://mapzen.com/documentation/search');
+}
 
 document.getElementById('btnPrev').addEventListener('click', _ => {
   saveSettings();
