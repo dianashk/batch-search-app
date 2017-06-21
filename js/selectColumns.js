@@ -10,12 +10,12 @@ function openDocumentation() {
   shell.openExternal('https://mapzen.com/documentation/search');
 }
 
-document.getElementById('btnPrev').addEventListener('click', _ => {
+function onPrevious() {
   saveSettings();
   ipcRenderer.send('loadPage', 'selectInputData');
-});
+}
 
-document.getElementById('btnNext').addEventListener('click', _ => {
+function onNext() {
   const endpoint = saveSettings();
 
   console.log(`endpoint determined to be ${endpoint}`);
@@ -26,8 +26,8 @@ document.getElementById('btnNext').addEventListener('click', _ => {
     return;
   }
   
-  ipcRenderer.send('loadPage', 'progressMap');
-});
+  ipcRenderer.send('loadPage', 'review');
+}
 
 document.getElementById('body').onload = () => {
   if (settings.has('inputDataPath')) {

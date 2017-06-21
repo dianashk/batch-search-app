@@ -1,5 +1,6 @@
 const { ipcRenderer, shell } = require('electron');
 const settings = require('electron-settings');
+const _ = require('lodash');
 
 const mapzenSearch = require('pelias-batch-search');
 
@@ -69,6 +70,12 @@ document.getElementById('body').onload = () => {
       'api_key': settings.get('apiKey')
     }    
   };
+
+  const advancedParams = settings.get('advancedParams');
+  if (advancedParams) {
+    params.queryParams = _.merge(params.queryParams, advancedParams);
+    console.log('full params:', params.queryParams);
+  }
 
   keepGoing = true;
 

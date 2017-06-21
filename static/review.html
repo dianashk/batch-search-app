@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Mapzen Search</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../dist/css/photon.min.css">
+    <link rel="stylesheet" href="https://mapzen.com/common/styleguide/styles/styleguide.css">
+    <link rel="stylesheet" href="../css/common.css">
+
+  </head>
+  <body id="body" onload="onLoad()">
+
+    <div id="title-bar">
+      <p>Review Batch Summary</p>
+    </div>
+
+    <div class="table-container headroom-large">
+      <h3 class="review-table footroom-med">Summary</h3>
+      <table class="table review-table">
+        <tr>
+          <td class="table-cell">Geocoding Type <i>(based on column mapping)</i></td>
+          <td class="table-cell text-info" id="geocodingType"></td>
+        </tr>
+        <tr>
+          <td class="table-cell">Total Expected Requests</td>
+          <td class="table-cell text-danger" id="totalRequests"></td>
+        </tr>
+        <tr>
+          <td class="table-cell">Estimated Cost</td>
+          <td class="table-cell text-danger enMoney" id="estimatedCost">0.00</td>
+        </tr>
+        <tr>
+          <td class="table-cell">Estimated Duration</td>
+          <td class="table-cell text-info" id="estimatedDuration">0</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="review-table">
+      <p class="text-center caption">
+        All of these numbers are rough estimates. For more accurate pricing please consult the
+          <a onclick="onPricingDetails()">geocoding pricing page</a> and your
+          <a onclick="onAccountDetails()">Mapzen Developer Dashboard</a>.
+        </i>
+      </p>
+    </div>
+
+    <div class="row review-table footroom-extra-large">
+      <h3 class="headroom footroom-med">Advanced</h3>
+      <div class="form wide">
+        <div class="form-group row footroom-extra-large">
+          <label class="h5" for="advancedParams">Additional Parameters</label>
+          <p class="caption">This can be used to append additional parameters to your queries, such as
+            <code>boundary.country</code>, <code>focus.point.*</code>, <code>layers</code>,
+            <code>sources</code>, or <code>boundary.rect.*</code>.
+            If specifying more than one of these, please use the <code>&</code> separator between parameters.
+            For example: <code>boundary.country=USA&layers=coarse</code>
+          </p>
+          <input type="text" class="form-control" id="advancedParams"/>
+        </div>
+      </div>
+    </div>
+    
+    <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
+      <div class="toolbar-actions">
+        <button id="btnPrev" class="btn btn-transparent" onclick="onPrevious()">
+          <i class="button-icons fa fa-fw fa-angle-left"></i> Map Data Columns
+        </button>
+        <button id="btnNext" class="btn btn-primary btn-mapzen pull-right" onclick="onNext()">
+          Start Processing <i class="button-icons fa fa-fw fa-angle-right"></i>
+        </button>
+      </div>
+    </footer>
+
+    <!-- Javascript -->
+    <script src="https://mapzen.com/common/styleguide/scripts/mapzen-styleguide.min.js"></script>
+
+  </body>
+
+  <script src="../js/review.js" charset="utf-8"></script>
+
+</html>
