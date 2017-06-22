@@ -2,35 +2,35 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Mapzen Search</title>
+    <title>Mapzen Batch Geocoder</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../dist/css/photon.min.css">
     <link rel="stylesheet" href="https://mapzen.com/common/styleguide/styles/styleguide.css">
     <link rel="stylesheet" href="../css/common.css">
-    
+
   </head>
   <body id="body">
 
-    <div id="title-bar">
-      <p style="color: #f8f8f8">Which CSV file would you like to geocode and where shall we store your results?</p>
+    <div class="row" id="title-bar">
+      <h3>Select input and output</h3>
     </div>
 
-    <div id="form-container">
-      <form>
-        <div class="form-group row">
-          <h4>Select input file:</h4>
-          <div style="border-style: solid; border-width: 1px; padding: 5px; margin: 20px;">
-            <button id="inputDataPathDisplay" class="btn btn-secondary">Select File...</button>
-            <span id="inputDataPathDisplayLabel" style="margin-left: 5px">No file selected</span>
-          </div>
-          <h4>Select output file:</h4>
-          <div style="border-style: solid; border-width: 1px; padding: 5px; margin: 20px;">
-            <button id="outputDataPathDisplay" class="btn btn-secondary">Select File...</button>
-            <span id="outputDataPathDisplayLabel" style="margin-left: 5px">No file selected</span>
-          </div>
+    <div class="container headroom-large footroom-extra-large">
+      <div class="row footroom-med">
+        <h4>Select input file</h4>
+        <div class="file-select">
+          <button id="inputDataPathDisplay" class="btn btn-secondary">Select File</button>
+          <span id="inputDataPathDisplayLabel" style="margin-left: 5px">No file selected</span>
         </div>
-      </form>
+      </div>
+      <div class="row">
+        <h4>Select output file</h4>
+        <div class="file-select" ">
+          <button id="outputDataPathDisplay" class="btn btn-secondary">Select File</button>
+          <span id="outputDataPathDisplayLabel" style="margin-left: 5px">No file selected</span>
+        </div>
+      </div>
     </div>
 
     <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">

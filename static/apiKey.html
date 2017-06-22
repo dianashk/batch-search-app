@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Mapzen Search</title>
+    <title>Mapzen Batch Geocoder</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../dist/css/photon.min.css">
@@ -12,44 +12,40 @@
   </head>
   <body id="body">
 
-    <div id="title-bar">
-      <p style="color: #f8f8f8">Please select an API key</p>
+    <div class="row" id="title-bar">
+      <h3>Please select an API key</h3>
     </div>
 
-    <div id="table-container" class="container" style="top: 20px;">
-      <div class="table-wrapper row" style="margin-right: auto; margin-left: auto; width: 85%">
-        <table>
-          <tr>
-            <td style="width: 80px">
-              <img id="user-avatar" class="avatar" src="../mapzen-util/public/img/mapzen-logo.png">
-            </td>
-            <td>
-              <div class="byline-author">
-                <h4 id="user-nickname">clever-nick-name</h4>
-                <p id="user-email"><i>me@gmail.com</i></p>
-              </div>              
-            </td>            
-          </tr>
-        </table>
-      </div>       
-      
-      <div id="table-container" class="container headroom-large footroom">
-        <div class="form-group-header">Select the key to use:</div>  
-        <div id="tableWrapper" class="table-wrapper" style="padding-bottom: 100px">
+    <div class="container headroom-large footroom-extra-large">
+      <div class="row footroom-large">
+        <img id="user-avatar" class="avatar" src="../mapzen-util/public/img/mapzen-logo.png">
+        <div class="user-info">
+          <p id="user-nickname">clever-nick-name</p>
+          <p id="user-email">me@gmail.com</p>
+          <button class="btn btn-with-arrow" onclick="switchUser()">Switch user</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div id="tableWrapper" class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 52.75%;">Project name</th>
+                <th>API key</th>
+              </tr>
+            </thead>
+          </table>
           <table id="user-keys" class="table">
           </table>
-        </div>        
+        </div>
       </div>
-      
     </div>
-    
+
     <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
       <div class="toolbar-actions">
-        <button id="btnPrev" class="btn btn-mapzen btn-secondary" onclick="switchUser()">
-           <i class="button-icons fa fa-fw fa-angle-left"></i> Switch User
-        </button>            
-        <button id="btnNext" class="btn btn-primary btn-mapzen pull-right">
-            Select input data file <i class="button-icons fa fa-fw fa-angle-right"></i>
+        <button id="btnNext" class="btn btn-primary pull-right">
+            Select file <i class="button-icons fa fa-fw fa-angle-right"></i>
         </button>
       </div>
     </footer>

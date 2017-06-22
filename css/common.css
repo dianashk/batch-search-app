@@ -1,14 +1,7 @@
 #title-bar {
-  height: 50px;
-  width: 100%;
-  background-color: #1e0e33; 
-  color: #f8f8f8;
+  height: 80px;
+  background-color: #2c1e3f;
   text-align: center;
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 50px;
-  font-family: "Poppins", "Open Sans", Helvetica, Arial, sans-serif;
-  font-weight: 500;
 }
 #form-container {
   height: calc(100% - 50px - 25% - 63px);
@@ -28,7 +21,10 @@
   top: 10%;
   left: 5%;
 }
-#apiKey {
+.table {
+  width: 60%;
+}
+/*#apiKey {
   background-image: url(https://mapzen.com/common/styleguide/images/key.svg);
   background-repeat: no-repeat;
   background-size: 20px 20px;
@@ -36,6 +32,24 @@
   padding: 8px 30px 8px 45px;
   text-align: center;
   min-width: 100%;
+}*/
+#user-avatar {
+  width: 60px;
+  height: 60px;
+  float: left;
+}
+#user-nickname {
+  font-weight: bold;
+  margin-top: 5px;
+}
+#user-email {
+  margin-top: -8px;
+}
+td {
+  padding: 6px 12px 4px;
+}
+#outputDataPathDisplay, #inputDataPathDisplay {
+  font-weight: bold;
 }
 .data-file {
   background-image: url(../dist/inputFile.svg);
@@ -47,9 +61,8 @@
   min-width: 100%;
 }
 .button-icons {
-  font-size: 2em;
+  font-size: 1.2em;
   margin-right: 8px;
-  vertical-align: middle;
 }
 .table-cell {
   text-align: left;
@@ -66,6 +79,14 @@
     border-radius: 5px;
     font-family: "Poppins", "Open Sans", Helvetica, Arial, sans-serif;
     font-weight: 500;
+}
+.file-select {
+  border: 1px solid;
+  padding: 6px;
+}
+h3 {
+  color: #ffffff;
+  margin-top: 30px;
 }
 .info h4 {
     margin: 0 0 5px;
@@ -124,5 +145,9 @@
   background-color: #1e0e33;
   color: #f8f8f8;
 }
-
+.toolbar-footer {
+  background-color: #EEE7F8; !important
+  border-top: 1px solid #6353782;
+  background-image: none;
+}
 html,body{margin: 0; padding: 0;}
