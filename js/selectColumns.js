@@ -63,7 +63,7 @@ document.getElementById('body').onload = () => {
           
           const dropdowns = columns.map((h) => {
             return `<select id="select-${h}">` +
-              `<option value="unused">-- IGNORE --</option>` +
+              `<option value="unused">-- SELECT --</option>` +
               `<option value="text">Full Address</option>` +
               `<option value="address">Num and Street</option>` +
               `<option value="locality">City</option>` +

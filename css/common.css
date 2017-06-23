@@ -90,6 +90,10 @@
   content:"$";
 }
 
+.enMoney::after {
+  content:"*";
+}
+
 .review-table {
   width: 50%;
   margin-left: auto;
