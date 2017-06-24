@@ -13,31 +13,35 @@
   <body id="body">
 
     <div class="row" id="title-bar">
-      <h3>Select the columns to be used as input to the geocoder</h3>
+      <h3>Preview data</h3>
     </div>
 
-    <div style="margin: auto; width: 80%; word-wrap: break-word;">
-      <h4>Specify the mapping of each column in your data to the geocoding parameters:</h4>
-      <a id="doc-link" onclick="openDocumentation()">Read more about parameters.</a>
-    </div>
-
-    <div id="table-container" class="container" style="margin: 20px;">
-      <div id="tableWrapper" class="table-wrapper">
-        <table id="inputDataPreview" class="table">
-        </table>
-      </div> <!-- table-wrapper -->
-      <div id="showingPreview">
-
+    <div class="container headroom-large footroom-extra-large">
+      <div class="row">
+        <p>Choose geocoding parameters for the columns in the input file that you would like to geocode. (<a id="doc-link" onclick="openDocumentation()">Learn more about parameters</a>)
+        </p>
+        <p class="caption">Note: Columns with no geocoding parameters selected will be ignored.
+        </p>
       </div>
-    </div> <!-- container -->
 
-    <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
+      <div class="row headroom">
+        <div id="tableWrapper" class="table-wrapper">
+          <table id="inputDataPreview" class="table">
+          </table>
+        </div>
+
+        <div id="showingPreview">
+        </div>
+      </div>
+    </div>
+
+    <footer class="toolbar toolbar-footer">
       <div class="toolbar-actions">
         <button id="btnPrev" class="btn btn-transparent" onclick="onPrevious()">
-          <i class="button-icons fa fa-fw fa-angle-left"></i> Select input data file
+          <i class="button-icons fa fa-fw fa-angle-left"></i> Select files
         </button>
         <button id="btnNext" class="btn btn-primary btn-mapzen pull-right" onclick="onNext()">
-          Review <i class="button-icons fa fa-fw fa-angle-right"></i>
+          Summary <i class="button-icons fa fa-fw fa-angle-right"></i>
         </button>
       </div>
     </footer>

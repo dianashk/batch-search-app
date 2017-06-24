@@ -112,42 +112,41 @@ h3 {
 }
 
 .review-table {
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
+  width: auto;
 }
 
 #map-container {
-  height: calc(100% - 100px - 63px);
+  height: calc(100% - 100px - 83px);
   position: relative;
 }
 #map {
   height: 100%;
   width: 100%;
-  position: absolute;
 }
 #progress-text {
   text-align: center;
   display: inline-block;
-  vertical-align: middle;
-  line-height: 40px;
-  background-color: #f8f8f8;
+  padding-top: 8px;
+  height: 40px;
+  background-color: #fbe6e3;
   width: 100%;
 }
 #progress-total {
   width: 100%;
   height: 40px;
-  background-color: #f8f8f8;
+  background-color: #fbe6e3;
 }
 #progress-done {
-  height: 10px;
+  height: 6px;
   width: 0;
-  background-color: #1e0e33;
-  color: #f8f8f8;
+  background-color: #f9a293;
 }
 .toolbar-footer {
   background-color: #EEE7F8; !important
   border-top: 1px solid #6353782;
   background-image: none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 html,body{margin: 0; padding: 0;}

@@ -9,6 +9,10 @@ function onPrevious() {
   ipcRenderer.send('loadPage', 'selectColumns');
 }
 
+function openDocumentation() {
+  shell.openExternal('https://mapzen.com/documentation/search');
+}
+
 function onNext() {
   if (!validateAdditionalParams()) {
     dialog.showErrorBox('Invalid Parameters', 'Invalid additional parameters. Please revise.');

@@ -34,7 +34,7 @@ const adminIcon = L.icon({
     iconSize:     [10, 10], // size of the icon
     popupAnchor:  [-3, -10] // point from which the popup should open relative to the iconAnchor
 });
-  
+
 document.getElementById('body').onload = () => {
   // Add a Mapzen API key
   L.Mapzen.apiKey = settings.get('apiKey');
@@ -48,19 +48,19 @@ document.getElementById('body').onload = () => {
           'https://mapzen.com/carto/refill-style/7/themes/brown-orange.zip'
         ],
         global: { 'sdk_building_extrude': 'false' }
-      }  
+      }
     }
   });
-  
+
   // Set the center of the map to be the San Francisco Bay Area at zoom level 12
   map.setView([0, 0], 2);
 
-  addLegend();  
+  addLegend();
 
   const inputDataPath = settings.get('inputDataPath');
   const endpoint = settings.get(`${inputDataPath}.endpoint`);
   const columns = settings.get(`${inputDataPath}.column-mapping`);
-  
+
   const params = {
     inputFile: settings.get('inputDataPath'),
     outputFile: settings.get('outputDataPath'),
@@ -68,7 +68,7 @@ document.getElementById('body').onload = () => {
     columns: columns,
     queryParams: {
       'api_key': settings.get('apiKey')
-    }    
+    }
   };
 
   const advancedParams = settings.get('advancedParams');
@@ -83,7 +83,7 @@ document.getElementById('body').onload = () => {
     keepGoing = false;
     onFinish();
   });
-  
+
   totalCount = settings.get(`${settings.get('inputDataPath')}.lineCount`) || 0;
   mapzenSearch(
     params,
@@ -97,7 +97,7 @@ document.getElementById('body').onload = () => {
             addDotToMap(data, bbox);
             break;
         }
-      }  
+      }
       return keepGoing;
     },
     onFinish
@@ -135,7 +135,7 @@ function onFinish() {
   stopBtn.addEventListener('click', _ => {
       shell.showItemInFolder(settings.get('outputDataPath'));
     });
-  stopBtn.innerHTML = '<i class="button-icons fa fa-fw fa-star"></i> Show results file';
+  stopBtn.innerHTML = '<i class="button-icons fa fa-fw fa-external-link"></i> Show results file';
 
   // show the start over button
   document.getElementById('btnStartOver').style.display = 'inline-block';
@@ -149,7 +149,7 @@ function htmlify(data) {
     }
     else {
       txt += `<tr><td>${x}: ${data[x]} </td></tr>`;
-    }  
+    }
   }
   txt += '</table></div></div>';
   return txt;
@@ -163,12 +163,12 @@ function addDotToMap(data, bbox) {
   }
 
   processedCount++;
-  
+
   let icon;
   switch (data.res_layer) {
     case 'venue':
       icon = venueIcon;
-      break;  
+      break;
     case 'address':
       icon = addressIcon;
       break;
@@ -178,11 +178,11 @@ function addDotToMap(data, bbox) {
     default:
       icon = adminIcon;
   }
-  
+
   const marker = L.marker([data.res_latitude, data.res_longitude], { icon: icon }).addTo(map);
   marker.bindPopup(htmlify(data));
 
-  const bounds = L.latLngBounds(L.latLng(bbox.minLat, bbox.minLon), L.latLng(bbox.maxLat, bbox.maxLon));  
+  const bounds = L.latLngBounds(L.latLng(bbox.minLat, bbox.minLon), L.latLng(bbox.maxLat, bbox.maxLon));
   map.fitBounds(bounds, {padding:[50,50]});
 }
 
@@ -206,7 +206,7 @@ function updateProgress() {
     document.getElementById('progress-done').style.width = `${pct}%`;
 
     if (totalCount === progress) {
-      progressText = `Finished: ${progressText}`;
+      progressText = `Completed: ${progressText}`;
     }
     else if (keepGoing === false) {
       progressText = `Stopped before completion: ${progressText}`;
