@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Mapzen Search</title>
+    <title>Mapzen Batch Geocoder</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../dist/css/photon.min.css">
@@ -12,61 +12,54 @@
   </head>
   <body id="body" onload="onLoad()">
 
-    <div id="title-bar">
-      <p>Review Batch Summary</p>
+    <div class="row" id="title-bar">
+      <h3>Batch geocoding summary</h3>
     </div>
 
-    <div class="table-container headroom-large">
-      <h3 class="review-table footroom-med">Summary</h3>
-      <table class="table review-table">
-        <tr>
-          <td class="table-cell">Geocoding Type <i>(based on column mapping)</i></td>
-          <td class="table-cell text-info" id="geocodingType"></td>
-        </tr>
-        <tr>
-          <td class="table-cell">Total Expected Requests</td>
-          <td class="table-cell text-danger" id="totalRequests"></td>
-        </tr>
-        <tr>
-          <td class="table-cell">Estimated Cost</td>
-          <td class="table-cell text-danger enMoney" id="estimatedCost">0.00</td>
-        </tr>
-        <tr>
-          <td class="table-cell">Estimated Duration</td>
-          <td class="table-cell text-info" id="estimatedDuration">0</td>
-        </tr>
-      </table>
-    </div>
+    <div class="container headroom-large footroom-extra-large">
+      <div class="row">
+        <div id="tableWrapper" class="table-wrapper">
+          <table class="table">
+            <tr>
+              <td class="table-cell">Geocoding Type <i>(based on column mapping)</i></td>
+              <td class="table-cell text-info" id="geocodingType"></td>
+            </tr>
+            <tr>
+              <td class="table-cell">Estimated Requests</td>
+              <td class="table-cell text-danger" id="totalRequests"></td>
+            </tr>
+            <tr>
+              <td class="table-cell">Estimated Cost</td>
+              <td class="table-cell text-danger enMoney" id="estimatedCost">0.00</td>
+            </tr>
+            <tr>
+              <td class="table-cell">Estimated Duration</td>
+              <td class="table-cell text-info" id="estimatedDuration">0</td>
+            </tr>
+          </table>
+        </div>
+        <p class="caption headroom">
+        Note: For more accurate geocoding pricing please consult the <a onclick="onPricingDetails()">pricing page</a>.The <a onclick="onAccountDetails()"> developer dashboard</a>.
+        </p>
+      </div>
 
-    <div class="review-table">
-      <p class="text-center caption">
-        All of these numbers are rough estimates. For more accurate pricing please consult the
-          <a onclick="onPricingDetails()">geocoding pricing page</a> and your
-          <a onclick="onAccountDetails()">Mapzen Developer Dashboard</a>.
-        </i>
-      </p>
-    </div>
-
-    <div class="row review-table footroom-extra-large">
-      <h3 class="headroom footroom-med">Advanced</h3>
-      <div class="form wide">
+      <div class="row headroom-med">
         <div class="form-group row footroom-extra-large">
-          <label class="h5" for="advancedParams">Additional Parameters</label>
-          <p class="caption">This can be used to append additional parameters to your queries, such as
+          <h4 for="advancedParams">Additional parameters (optional)</h4>
+          <p>Append additional parameters to your queries, such as
             <code>boundary.country</code>, <code>focus.point.*</code>, <code>layers</code>,
             <code>sources</code>, or <code>boundary.rect.*</code>.
-            If specifying more than one of these, please use the <code>&</code> separator between parameters.
-            For example: <code>boundary.country=USA&layers=coarse</code>
-          </p>
-          <input type="text" class="form-control" id="advancedParams"/>
+            To specify multiple, use the <code>&</code> separator between parameters.
+            For example: <code>boundary.country=USA&layers=coarse</code> (<a id="doc-link" onclick="openDocumentation()">View full list of parameters</a>)</p>
+          <input type="text" class="form-control headroom" id="advancedParams"/>
         </div>
       </div>
     </div>
-    
-    <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
+
+    <footer class="toolbar toolbar-footer">
       <div class="toolbar-actions">
         <button id="btnPrev" class="btn btn-transparent" onclick="onPrevious()">
-          <i class="button-icons fa fa-fw fa-angle-left"></i> Map Data Columns
+          <i class="button-icons fa fa-fw fa-angle-left"></i> Preview data
         </button>
         <button id="btnNext" class="btn btn-primary btn-mapzen pull-right" onclick="onNext()">
           Start Processing <i class="button-icons fa fa-fw fa-angle-right"></i>

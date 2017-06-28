@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Mapzen Search</title>
+    <title>Mapzen Batch Geocoder</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../dist/css/photon.min.css">
@@ -12,24 +12,18 @@
   </head>
   <body id="body">
 
-    <div id="title-bar">
-      <p style="color: #f8f8f8">Welcome!</p>
+    <div class="row" id="title-bar">
+      <h3> Welcome to the Mapzen batch geocoder!</h3>
     </div>
 
-    <div id="form-container">
-      <form>
-        <div class="form-group row" style="text-align: center;">
-          <p>Before we get started, please login to your Mapzen Developer account.</p>
-          <p>Go ahead, we'll wait right here.</p>
-          <p><i>Clicking the Login button below will open a new window in which you'll authenticate.</i></p>
-        </div>
-      </form>
+    <div class="container headroom-extra-large">
+      <p>Before we get started, please <strong>sign up</strong> or <strong>sign in</strong> with your Mapzen Developer account.</p>
     </div>
-    
-    <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
+
+    <footer class="toolbar toolbar-footer">
       <div class="toolbar-actions">
-        <button id="btnNext" class="btn btn-primary btn-mapzen pull-right" onclick="onLogin()">
-            Login <i class="button-icons fa fa-fw fa-angle-right"></i>
+        <button id="btnNext" class="btn btn-primary pull-right" onclick="onLogin()">
+            Sign up / Sign in <i class="button-icons fa fa-fw fa-angle-right"></i>
         </button>
       </div>
     </footer>

@@ -22,10 +22,10 @@ function onNext() {
 
   if (endpoint === 'invalid') {
     dialog.showErrorBox('Invalid column selection',
-      'You need to select the columns to be used as input to the geocoder! Use the dropdowns above each column. We\'ll wait...');
+      'Please choose an input parameter for at least one column from the dropdown');
     return;
   }
-  
+
   ipcRenderer.send('loadPage', 'review');
 }
 
@@ -40,10 +40,10 @@ document.getElementById('body').onload = () => {
       enclosedChar: '"' // default is an empty string
     };
 
-    let count = 0; 
+    let count = 0;
     let columns = [];
 
-    const inputDataPath = settings.get('inputDataPath');    
+    const inputDataPath = settings.get('inputDataPath');
 
     // this will run async and set the line count in settings
     getLineCount(inputDataPath);
@@ -52,7 +52,7 @@ document.getElementById('body').onload = () => {
 
     input.pipe(csvReader.createStream(options))
       .pipe(through.obj((data, enc, next) => {
-      
+
         // add column headers on first row
         if (count === 0) {
           columns = Object.keys(data);
@@ -60,28 +60,28 @@ document.getElementById('body').onload = () => {
           settings.set(inputDataPath, { columns: columns });
 
           const thead = document.createElement('thead');
-          
+
           const dropdowns = columns.map((h) => {
             return `<select id="select-${h}">` +
-              `<option value="unused">-- IGNORE --</option>` +
+              `<option value="unused">--Choose parameter--</option>` +
               `<option value="text">Full Address</option>` +
               `<option value="address">Num and Street</option>` +
               `<option value="locality">City</option>` +
               `<option value="region">State</option>` +
               `<option value="country">Country</option>` +
-              `<option value="postalcode">Postalcode</option>` +
+              `<option value="postalcode">Postal/ZIP code</option>` +
               `<option value="point.lat">Latitude</option>` +
               `<option value="point.lon">Longitude</option>` +
               `</select>`;
-          });          
+          });
           addRow(thead, ['   '].concat(dropdowns));
-          
+
           addRow(thead, ['   '].concat(columns));
-          
+
           table.appendChild(thead);
         }
-        
-        count++;  
+
+        count++;
 
         data.mz_count = count;
         addRow(table, ['mz_count'].concat(columns), data);
@@ -92,7 +92,7 @@ document.getElementById('body').onload = () => {
 
           return input.destroy();
         }
-                
+
         next();
       }));
   }
@@ -117,7 +117,7 @@ function getLineCount(inputDataPath) {
 function addRow(parent, columns, data) {
   let tr = document.createElement('tr');
   let td = document.createElement('td');
-        
+
   columns.forEach((c) => {
     td = document.createElement('td');
     td.innerHTML = `<p class="table-cell">  ${(data ? data[c] : c)} </p>`;
@@ -132,8 +132,8 @@ function saveSettings() {
     var mapping = columns.map((c) => {
       return { column: c, mapping: document.getElementById(`select-${c}`).value };
     });
-    
-    const endpoint = determineEndpoint(mapping);    
+
+    const endpoint = determineEndpoint(mapping);
     settings.set(`${settings.get('inputDataPath')}.endpoint`, endpoint.endpoint);
     settings.set(`${settings.get('inputDataPath')}.column-mapping`, endpoint.columns);
 

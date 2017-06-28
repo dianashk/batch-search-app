@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Mapzen Search</title>
+    <title>Mapzen Batch Geocoder</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../dist/css/photon.min.css">
@@ -19,14 +19,9 @@
   </head>
   <body id="body">
 
-    <div id="title-bar">
-      <p style="color: #f8f8f8">Geocoding in progress</p>
+    <div class="row" id="title-bar">
+      <h3>Geocoding in progress</h3>
     </div>
-
-    <div id="map-container">
-      <div id="map"></div>
-    </div> <!-- container -->
-
     <div id="progress" class="row">
       <div id="progress-total">
         <span id="progress-text"></span>
@@ -34,13 +29,17 @@
       <div id="progress-done"></div>
     </div>
 
-    <footer class="toolbar toolbar-footer" style="position: fixed; bottom: 0; width: 100%;">
+    <div id="map-container">
+      <div id="map"></div>
+    </div> <!-- container -->
+
+    <footer class="toolbar toolbar-footer">
       <div class="toolbar-actions">
         <button id="btnStartOver" class="btn btn-secondary" onclick="startOver()" style="display: none">
-          <i class="button-icons fa fa-fw fa-angle-left"></i> Start Over
+          <i class="button-icons fa fa-fw fa-home"></i> Start Over
         </button>
         <button id="btnStop" class="btn btn-primary btn-mapzen pull-right">
-          <i class="button-icons fa fa-fw fa-stop"></i> Stop Processing
+          <i class="button-icons fa fa-fw fa-ban"></i> Stop Processing
         </button>
       </div>
     </footer>

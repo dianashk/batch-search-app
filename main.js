@@ -34,13 +34,13 @@ app.on('window-all-closed', () => {
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800,
-    height: 600
+    width: 1024,
+    height: 768
   });
   win.setTitle('Mapzen Search');
 
   loadPage('intro');
-  
+
   win.on('closed', () => {
     win = null;
   });
@@ -95,7 +95,7 @@ ipcMain.on('openFile', (event, path) => {
     filters: [{ name: 'CSV', extensions: ['csv'] }],
     properties: ['openFile']
   };
-  
+
   dialog.showOpenDialog(win, options, function (fileNames) {
     // fileNames is an array that contains all the selected
     if (fileNames === undefined) {
@@ -112,7 +112,7 @@ ipcMain.on('createFile', (event, path, defaultPath) => {
     filters: [{ name: 'CSV', extensions: ['csv'] }],
     properties: ['openFile']
   };
-  
+
   dialog.showSaveDialog(win, options, function (fileName) {
     // fileNames is an array that contains all the selected
     if (fileName === undefined) {
