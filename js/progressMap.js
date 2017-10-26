@@ -1,6 +1,7 @@
 const { ipcRenderer, shell } = require('electron');
 const settings = require('electron-settings');
 const _ = require('lodash');
+const config = require('../config.json');
 
 const mapzenSearch = require('pelias-batch-search');
 
@@ -62,6 +63,8 @@ document.getElementById('body').onload = () => {
   const columns = settings.get(`${inputDataPath}.column-mapping`);
 
   const params = {
+    baseUrl: config.search.baseUrl || 'https://search.mapzen.com/v1/',
+    qps: config.search.qps || 6,
     inputFile: settings.get('inputDataPath'),
     outputFile: settings.get('outputDataPath'),
     endpoint: endpoint,

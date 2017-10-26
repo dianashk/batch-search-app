@@ -17,6 +17,10 @@ Your `config.json` file should look something like this and be located at the ro
     "client_secret": "your-client-secret",
     "redirect_uri": "http://localhost:9000/mapzen/auth/callback",
     "host": "https://mapzen.com"
+  },
+  "search": {
+    "baseUrl": "https://search.mapzen.com/v1/",
+    "qps": 6
   }
 }
 ```
